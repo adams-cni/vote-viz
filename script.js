@@ -17,7 +17,7 @@ var xBounds = { left: 50, right: width - 50 };
 var yBounds = { top: 50, bottom: height - 50 };
 
 // Your original variables remain unchanged
-var split = 8;
+var split = 7;
 var xCenter = [width / split, width / 2, (width / split) * (split-1)];
 var yCenter = height / 2;
 
