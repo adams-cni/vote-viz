@@ -1,6 +1,6 @@
 var red = "#e63225";
 var blue = "#3f5bd4";
-var radius = 12;
+var radius = 10;
 var rawData = [
     {
         "id": "Neil Anderson",
