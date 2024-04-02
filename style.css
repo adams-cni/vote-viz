@@ -1,0 +1,74 @@
+body{
+    font-family: sans-serif;
+}
+.tooltip {
+    position: relative;
+    text-align: left;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    pointer-events: none;
+}
+.graph-svg-component {
+    background-color: white;
+}
+
+/* In your style.css file */
+.graph-container {
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#graph {
+    background-color: white;
+}
+
+input{
+    border: 2px solid #ccc;
+    outline: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff; /* Change border color to blue on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow */
+}
+
+#hed{
+    color:black;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+#sub{
+    padding-top: 10px;
+    font-size: .9em;
+}
+
+.select-container {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#credit{
+    padding-top: 10px;
+    color:dimgrey;
+    font-size: .8em;
+}
+
+
+.select-container select {
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.select-container select::-ms-expand {
+    display: none;
+}
+
