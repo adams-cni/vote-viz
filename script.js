@@ -17,7 +17,8 @@ var xBounds = { left: 50, right: width - 50 };
 var yBounds = { top: 50, bottom: height - 50 };
 
 // Your original variables remain unchanged
-var xCenter = [width / 5, width / 2, (width / 5) * 4];
+var split = 8;
+var xCenter = [width / split, width / 2, (width / split) * (split-1)];
 var yCenter = height / 2;
 
 var labels = ["Yes", "Present", "No"];
@@ -243,8 +244,8 @@ function ticked() {
 function updateSVGSize() {
     width = window.innerWidth;
     height = calculateAvailableHeight();
-    xCenter = [width / 5, width / 2, (width / 5) * 4];
-    yCenter = height / 2;
+    var xCenter = [width / split, width / 2, (width / split) * (split-1)];
+    var yCenter = height / 2;
 
     svg.attr("width", width)
        .attr("height", height)
