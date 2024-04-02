@@ -1,6 +1,14 @@
 var red = "#e63225";
 var blue = "#3f5bd4";
-var radius = 10;
+
+var radius = 11; 
+
+if (window.innerWidth < 500){
+    radius = 5;
+} else {
+    radius = 11;
+}
+
 var rawData = [
     {
         "id": "Neil Anderson",
