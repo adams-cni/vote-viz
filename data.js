@@ -4,7 +4,7 @@ var blue = "#3f5bd4";
 var radius = 11; 
 
 if (window.innerWidth < 500){
-    radius = 5;
+    radius = 7;
 } else {
     radius = 11;
 }
