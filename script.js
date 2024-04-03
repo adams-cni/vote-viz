@@ -1,10 +1,11 @@
 function getCSVFileNameFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
+    var urlParams = new URLSearchParams(window.location.search);
     console.log(1);
     console.log(urlParams);
     console.log(2);
     console.log(urlParams.get('data'));
-    return urlParams.get('data'); // 'data' is the name of the parameter in the URL
+    var dataFileName = urlParams.get('data');
+    return dataFileName; // 'data' is the name of the parameter in the URL
 }
 
 var voteToCategory = {
