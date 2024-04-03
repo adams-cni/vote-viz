@@ -2,16 +2,19 @@ body{
     font-family: sans-serif;
 }
 .tooltip {
-    position: relative;
+    position: absolute;
     text-align: left;
-    padding: 2px;
+    padding: 10px;
     font: 12px sans-serif;
-    background: black;
-    border: 1px solid black;
+    background: rgba(220,220,220,0.85);
+    border: 0.5px solid grey;
     border-radius: 5px;
     pointer-events: none;
+    pointer-events: none;
+    background-color: "#FF5C61";
     z-index:999999;
 }
+
 .graph-svg-component {
     background-color: white;
 }
@@ -72,3 +75,4 @@ input[type="text"]:focus {
 .select-container select::-ms-expand {
     display: none;
 }
+
