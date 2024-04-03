@@ -1,6 +1,6 @@
 function getCSVFileNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(1);
+    console.log("UrlParams:");
     console.log(urlParams);
     return urlParams.get('data'); // 'data' is the name of the parameter in the URL
 }
@@ -27,7 +27,7 @@ async function loadDataAndVisualize() {
     try {
         // Load the CSV data
         var csvFileName = getCSVFileNameFromURL() || 'vote.csv';
-        console.log(3);
+        console.log("csvFilePath");
         var csvFilePath = "votes/"+csvFileName;
         console.log(csvFilePath);
         
