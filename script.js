@@ -1,11 +1,8 @@
 function getCSVFileNameFromURL() {
-    var urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search);
     console.log(1);
     console.log(urlParams);
-    console.log(2);
-    console.log(urlParams.get('data'));
-    var dataFileName = urlParams.get('data');
-    return dataFileName; // 'data' is the name of the parameter in the URL
+    return urlParams.get('data'); // 'data' is the name of the parameter in the URL
 }
 
 var voteToCategory = {
@@ -29,12 +26,12 @@ rawData = [];
 async function loadDataAndVisualize() {
     try {
         // Load the CSV data
-        const csvFileName = getCSVFileNameFromURL() || 'vote.csv';
+        var csvFileName = getCSVFileNameFromURL() || 'vote.csv';
         console.log(3);
-        console.log(csvFileName);
-        const filePath = `${csvFileName}`;
-        console.log(4);
-        console.log(filePath);
+        var csvFilePath = "votes/"+csvFileName;
+        console.log(csvFilePath);
+        
+        var rawData = await d3.csv(csvFilePath);
 
         // Transform and prepare rawData
         const processedData = rawData.map(d => {
@@ -294,11 +291,3 @@ function createVisualization(processedData) {
 
 // Call the async function to load data and create the visualization
 loadDataAndVisualize();
-
-
-
-
-
-
-
-
