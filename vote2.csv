@@ -1,0 +1,60 @@
+id,District,Party,party_long,vote,category,radius,color
+Neil Anderson,47,R,Republican,Yes,2,radius,red
+Omar Aquino,2,D,Democrat,No,0,radius,blue
+Christopher Belt,57,D,Democrat,Yes,2,radius,blue
+Tom Bennett,53,R,Republican,Yes,2,radius,red
+Terri Bryant,58,R,Republican,Yes,2,radius,red
+Cristina Castro,22,D,Democrat,No,0,radius,blue
+Javier L. Cervantes,1,D,Democrat,No,0,radius,blue
+Andrew S. Chesney,45,R,Republican,No,0,radius,red
+Lakesia Collins,5,D,Democrat,Yes,2,radius,blue
+Bill Cunningham,18,D,Democrat,Yes,2,radius,blue
+John F. Curran,41,R,Republican,No,0,radius,red
+Donald P. DeWitte,33,R,Republican,No,0,radius,red
+Mary Edly-Allen,31,D,Democrat,Yes,2,radius,blue
+Laura Ellman,21,D,Democrat,Yes,2,radius,blue
+Paul Faraci,52,D,Democrat,Yes,2,radius,blue
+Sara Feigenholtz,6,D,Democrat,No,0,radius,blue
+Laura Fine,9,D,Democrat,No,0,radius,blue
+Dale Fowler,59,R,Republican,Yes,2,radius,red
+Ann Gillespie,27,D,Democrat,No,0,radius,blue
+Suzy Glowiak Hilton,23,D,Democrat,No,0,radius,blue
+Michael W. Halpin,36,D,Democrat,No,0,radius,blue
+Don Harmon,39,D,Democrat,No,0,radius,blue
+"Napoleon Harris, III",15,D,Democrat,No,0,radius,blue
+Erica Harriss,56,R,Republican,Present,1,radius,red
+Michael E. Hastings,19,D,Democrat,Present,0,radius,blue
+Linda Holmes,42,D,Democrat,Present,0,radius,blue
+Mattie Hunter,3,D,Democrat,No,0,radius,blue
+Adriane Johnson,30,D,Democrat,Present,1,radius,blue
+"Emil Jones, III",14,D,Democrat,Present,1,radius,blue
+Patrick J. Joyce,40,D,Democrat,No,0,radius,blue
+David Koehler,46,D,Democrat,No,0,radius,blue
+Seth Lewis,24,R,Republican,Yes,2,radius,red
+Kimberly A. Lightford,4,D,Democrat,No,0,radius,blue
+Meg Loughran Cappel,49,D,Democrat,No,0,radius,blue
+Robert F. Martwick,10,D,Democrat,No,0,radius,blue
+Steve McClure,54,R,Republican,Yes,2,radius,red
+Dan McConchie,26,R,Republican,Yes,2,radius,red
+Julie A. Morrison,29,D,Democrat,No,0,radius,blue
+Laura M. Murphy,28,D,Democrat,No,0,radius,blue
+Robert Peters,13,D,Democrat,No,0,radius,blue
+Jason Plummer,55,R,Republican,Yes,2,radius,red
+Mike Porfirio,11,D,Democrat,No,0,radius,blue
+Willie Preston,16,D,Democrat,No,0,radius,blue
+Sue Rezin,38,R,Republican,Yes,2,radius,red
+Chapin Rose,51,R,Republican,Yes,2,radius,red
+Mike Simmons,7,D,Democrat,No,0,radius,blue
+"Elgie R. Sims, Jr.",17,D,Democrat,No,0,radius,blue
+Steve Stadelman,34,D,Democrat,No,0,radius,blue
+Win Stoller,37,R,Republican,Yes,2,radius,red
+Dave Syverson,35,R,Republican,Yes,2,radius,red
+Natalie Toro,20,D,Democrat,No,0,radius,blue
+Jil Tracy,50,R,Republican,Yes,2,radius,red
+Doris Turner,48,D,Democrat,No,0,radius,blue
+Sally J. Turner,44,R,Republican,Yes,2,radius,red
+Rachel Ventura,43,D,Democrat,No,0,radius,blue
+Karina Villa,25,D,Democrat,No,0,radius,blue
+Celina Villanueva,12,D,Democrat,No,0,radius,blue
+Ram Villivalam,8,D,Democrat,No,0,radius,blue
+Craig Wilcox,32,R,Republican,Yes,2,radius,red
