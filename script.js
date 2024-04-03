@@ -1,4 +1,7 @@
-var csvFilePath = 'vote.csv';
+function getCSVFileNameFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('data'); // 'data' is the name of the parameter in the URL
+}
 
 var voteToCategory = {
     "yes": 0,
@@ -21,7 +24,8 @@ rawData = [];
 async function loadDataAndVisualize() {
     try {
         // Load the CSV data
-        var rawData = await d3.csv(csvFilePath);
+        const csvFileName = getCSVFileNameFromURL() || 'vote.csv';
+        const filePath = `path/to/your/data/${csvFileName}`;
 
         // Transform and prepare rawData
         const processedData = rawData.map(d => {
