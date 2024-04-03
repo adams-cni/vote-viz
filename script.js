@@ -127,6 +127,15 @@ function createVisualization(processedData) {
 
         return nodeSelection;
     }
+    
+    var selectContainer = d3.select("#sub")
+        .append("div")
+        .classed("select-container", true);
+
+    selectContainer.append("span")
+        .text("")
+        .style("font-family", "sans-serif")
+        .style("font-weight", "bold");
 
     // Function to update nodes' opacity based on search query
     function updateNodeVisibility(query) {
@@ -137,8 +146,6 @@ function createVisualization(processedData) {
             return nodeIdLowerCase.includes(lowerCaseQuery) ? 1 : 0.2;
         });
     }
-
-    
 
     // Event listener for the search input
     d3.select("#searchNode").on("input", function(event) {
@@ -214,7 +221,6 @@ function createVisualization(processedData) {
 
 
     function ticked() {
-        console.log("ticked");
         node
             .attr("cx", function(d) { 
                 return Math.max(radius, Math.min(width - radius, d.x)); 
@@ -271,7 +277,6 @@ function createVisualization(processedData) {
 
     // Listen to window resize events
     window.addEventListener('resize', updateSVGSize);
-        console.log("Visualization created with rawData:");
 }
 
 // Call the async function to load data and create the visualization
