@@ -1,6 +1,6 @@
 function getCSVFileNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    console.log("UrlParams:");
+    console.log(1);
     console.log(urlParams);
     return urlParams.get('data'); // 'data' is the name of the parameter in the URL
 }
@@ -22,12 +22,29 @@ if (window.innerWidth < 500){
     radius = 11;
 }
 rawData = [];
+
+function calculateCategoryCounts(processedData) {
+    // Initialize category counts
+    let categoryCounts = {0: 0, 1: 0, 2: 0}; // Map for "yes", "present", and "no" categories
+
+    // Iterate through processedData to count each category occurrence
+    processedData.forEach(d => {
+        if(categoryCounts.hasOwnProperty(d.category)) {
+            categoryCounts[d.category]++;
+        } else {
+            console.warn(`Unexpected category value encountered: ${d.category}`);
+        }
+    });
+
+    return categoryCounts;
+}
+
 // Function to load data and perform all operations that depend on rawData
 async function loadDataAndVisualize() {
     try {
         // Load the CSV data
         var csvFileName = getCSVFileNameFromURL() || 'vote.csv';
-        console.log("csvFilePath");
+        console.log(3);
         var csvFilePath = "votes/"+csvFileName;
         console.log(csvFilePath);
         
@@ -45,6 +62,9 @@ async function loadDataAndVisualize() {
                 category: category
             };
         });
+        
+        let categoryCounts = calculateCategoryCounts(processedData);
+        console.log("Category Counts:", categoryCounts);
 
         createVisualization(processedData);
 
@@ -55,7 +75,7 @@ async function loadDataAndVisualize() {
 }
 
 // Function that uses rawData to create the visualization
-function createVisualization(processedData) {
+    function createVisualization(processedData) {    
     // Calculate the available height for the SVG, minus the header and footer
     function calculateAvailableHeight() {
         const hedHeight = document.getElementById('hed').clientHeight;
@@ -102,18 +122,52 @@ function createVisualization(processedData) {
         .attr("class", "graph-svg-component")
         .attr("viewBox", `0 0 ${width} ${height}`);
 
-    svg.append("line")
-        .attr("id", "center-line") // Assigning an ID for easy selection
-        .attr("x1", 0)
-        .attr("y1", yCenter)
-        .attr("x2", width)
-        .attr("y2", yCenter)
-        .style("stroke", "lightgray")
-        .style("stroke-width", 2);
+    var countsGroup = svg.append("g").attr("class", "labels-and-lines");
 
-    // Append each label to the SVG
-    labels.forEach(function(label, i) {
-        svg.append("text")
+    // displaying the cat counts    
+    function displayCategoryCountsOnSVG(categoryCounts, xCenter,yCenter) {
+        var labelYOffset = height/2-height*0.1;
+        var yCountPos = yCenter - labelYOffset + 20;
+        var labels = ["Yes", "Present", "No"]; // Corresponding to categories 0, 1, 2
+        
+        countsGroup.selectAll(".count-label,.count-line,.line,.text").remove();
+        
+        countsGroup.append("line")
+                .attr("class", "center-line") // Assigning an ID for easy selection
+                .attr("x1", 0)
+                .attr("y1", yCenter)
+                .attr("x2", width)
+                .attr("y2", yCenter)
+                .style("stroke", "lightgray")
+                .style("stroke-width", 2);
+            
+  
+
+        labels.forEach((label, i) => {
+            // Assuming xCenter positions from your setup, corresponding to category labels
+            countsGroup.append("text")
+                .attr("class", "count-line")
+                .attr("x", xCenter[i])
+                .attr("y", yCountPos)
+                .attr("text-anchor", "middle")
+                .style("fill", "grey")
+                .style("font-family", "Arial, sans-serif")
+                .style("font-size", "14px")
+                .text(`${categoryCounts[i]}`); // Displaying the count next to its label
+            
+            var yPosLineBottom = yCountPos + 12 ;
+            
+            countsGroup.append("line")
+            .attr("x1", xCenter[i])
+            .attr("y1", yPosLineBottom)
+            .attr("x2", xCenter[i])
+            .attr("y2", yCenter) // Extend to yCenter
+            .style("stroke", "grey")
+            .style("opacity", 0.5)
+            .style("stroke-width", 1)
+            .attr("class", "count-line");
+            
+            countsGroup.append("text")
             .attr("x", xCenter[i])
             .attr("y", yCenter - labelYOffset) // Adjusting position above the line
             .attr("text-anchor", "middle") // Centers the text at its x position
@@ -122,10 +176,20 @@ function createVisualization(processedData) {
             .style("font-size", "16px") // Font size
             .text(label)
             .classed("label-text",true);
-    });
+    });              
+}
+    
+    // Assuming you calculate categoryCounts here or pass it to this function
+    let categoryCounts = calculateCategoryCounts(processedData);
 
+    // Now display these counts on the SVG
+    displayCategoryCountsOnSVG(categoryCounts, xCenter,yCenter);
+        
+    
     var node = createNodes(svg, nodes);
+    var nodesGroup = svg.append("g").attr("class", "nodes");
 
+        
     // Function to create nodes
     function createNodes(svg, nodes) {
         var nodeSelection = svg.selectAll("circle")
@@ -190,15 +254,7 @@ function createVisualization(processedData) {
     // Ensure the tooltip is appended to the body and has an absolute position
     var tooltip = d3.select("body").selectAll(".tooltip").data([0]).enter()
         .append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0)
-        .style("position", "absolute")
-        .style("pointer-events", "none")
-        .style("padding", "10px")
-        .style("background-color", "white")
-        .style("border", "1px solid black")
-        .style("border-radius", "5px")
-        .style("pointer-events", "none");
+        .attr("class", "tooltip");
 
     // Declare a variable at a scope accessible by both handleMouseOver and handleMouseOut
     var hideTooltipTimeout;
@@ -207,7 +263,7 @@ function createVisualization(processedData) {
         // Clear any existing timeout to ensure it does not hide the current tooltip
         clearTimeout(hideTooltipTimeout);
 
-        tooltip.html("Name: " + d.id + "<br/>Party: " + d.party_long)
+        tooltip.html("<b>Name: </b>" + d.id + "<br/><b>Party:</b> " + d.party_long+ "<br/><b>Vote:</b> " + d.vote+ "<br/><b>District:</b> " + d.District)
             .style("opacity", 1)
             .style("left", (event.pageX + 15) + "px")
             .style("top", (event.pageY - 28) + "px");
@@ -243,39 +299,28 @@ function createVisualization(processedData) {
 
     // Function to update the SVG dimensions on window resize
     function updateSVGSize() {
-        width = window.innerWidth;
+        width = 0.8*window.innerWidth;
         height = calculateAvailableHeight();
-        var xCenter = [width / split, width / 2, (width / split) * (split-1)];
-        var yCenter = height / 2;
+        svg.selectAll(".count-label").remove();
+        svg.selectAll(".count-line").remove();
+        svg.selectAll(".center-line").remove();
+        svg.selectAll(".text").remove();
+        xCenter = [width / split, width / 2, (width / split) * (split-1)];
+        yCenter = height / 2;
 
         svg.attr("width", width)
            .attr("height", height)
            .attr("viewBox", `0 0 ${width} ${height}`);
-
-        d3.select("#center-line")
-            .attr("x1", 0)
-            .attr("y1", yCenter)
-            .attr("x2", width)
-            .attr("y2", yCenter);
+        
 
         // Remove existing labels
-        svg.selectAll(".label-text").remove(); // This removes all elements with the 'label-text' class
+        svg.selectAll(".label-text").remove();// This removes all elements with the 'label-text' class
 
         // Redraw the labels
-        var labels = ["Yes", "Present", "No"];
-        var labelYOffset = height/2-height*0.1; // Adjust as necessary
-
-        labels.forEach(function(label, i) {
-            svg.insert("text", ":first-child") // This ensures the text is added behind existing elements
-                .attr("class", "label-text")
-                .attr("x", xCenter[i])
-                .attr("y", yCenter - labelYOffset)
-                .attr("text-anchor", "middle")
-                .style("fill", "black")
-                .style("font-family", "Arial, sans-serif")
-                .style("font-size", "16px")
-                .text(label);
-        });
+        
+        displayCategoryCountsOnSVG(categoryCounts, xCenter, yCenter);
+        
+        
 
         simulation.force('x', d3.forceX().x(function(d) {
             return xCenter[d.category];
@@ -291,3 +336,11 @@ function createVisualization(processedData) {
 
 // Call the async function to load data and create the visualization
 loadDataAndVisualize();
+
+
+
+
+
+
+
+
