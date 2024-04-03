@@ -1,8 +1,8 @@
 function getCSVFileNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams);
+    console.log("1",urlParams);
     return urlParams.get('data'); // 'data' is the name of the parameter in the URL
-    console.log(urlParams.get('data'));
+    console.log("2",urlParams.get('data'));
 }
 
 var voteToCategory = {
@@ -27,9 +27,9 @@ async function loadDataAndVisualize() {
     try {
         // Load the CSV data
         const csvFileName = getCSVFileNameFromURL() || 'vote.csv';
-        console.log(csvFileName);
+        console.log("3",csvFileName);
         const filePath = `${csvFileName}`;
-        console.log(filePath);
+        console.log("4",filePath);
 
         // Transform and prepare rawData
         const processedData = rawData.map(d => {
