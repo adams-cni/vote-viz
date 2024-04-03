@@ -127,11 +127,77 @@ function createVisualization(processedData) {
 
         return nodeSelection;
     }
-  
+
+    // Function to update nodes' opacity based on search query
+    function updateNodeVisibility(query) {
+        var lowerCaseQuery = query.toLowerCase();
+        node.style("opacity", function(d) {
+            // Convert node id to lower case for case-insensitive comparison
+            var nodeIdLowerCase = d.id.toLowerCase();
+            return nodeIdLowerCase.includes(lowerCaseQuery) ? 1 : 0.2;
+        });
+    }
+
+    
+
+    // Event listener for the search input
     d3.select("#searchNode").on("input", function(event) {
         updateNodeVisibility(event.target.value);
     });
-    
+
+    /*
+    var dropdown = selectContainer.append("select")
+        .on("change", function() {
+            var selectedId = this.value;
+            updateOpacity(selectedId);
+        });
+
+    // Add the placeholder option
+    dropdown.append("option")
+        .attr("value", "")
+        .attr("disabled", true)
+        .attr("selected", true)
+        .text("Select a node")
+        .style("color", "rgba(0, 0, 0, 0.1)");
+
+    // Populate the dropdown with options
+    dropdown.selectAll("option.node-option")
+        .data(nodes)
+        .enter().append("option")
+        .classed("node-option", true)
+        .attr("value", function(d) { return d.id; })
+        .text(function(d) { return d.id; });
+
+    // Update opacity based on selected option
+    function updateOpacity(selectedId) {
+        node.style("opacity", function(d) {
+            return selectedId ? (d.id === selectedId ? 1 : 0.5) : 1;
+        });
+    }
+
+    var clearButton = selectContainer.append("button")
+        .text("Clear")
+        .on("click", function() {
+            dropdown.property("value", ""); // Set the dropdown value to empty
+            updateOpacity(null);
+        });
+
+    // Position the clear button next to the dropdown
+    clearButton.style("margin-left", "10px")
+          .style("border", "none")
+          .style("background-color", "transparent")
+          .style("color", "#7d7d7d")
+          .style("font-weight", "bold");
+
+    function updateOpacity(selectedId) {
+        node.style("opacity", function(d) {
+            return selectedId ? (d.id === selectedId ? 1 : 0.5) : 1;
+        });
+    }
+    */
+
+
+
     var drag = d3.drag()
         .on("start", dragStarted)
         .on("drag", dragged)
@@ -201,6 +267,7 @@ function createVisualization(processedData) {
 
 
     function ticked() {
+        console.log("ticked");
         node
             .attr("cx", function(d) { 
                 return Math.max(radius, Math.min(width - radius, d.x)); 
@@ -257,15 +324,8 @@ function createVisualization(processedData) {
 
     // Listen to window resize events
     window.addEventListener('resize', updateSVGSize);
+        console.log("Visualization created with rawData:");
 }
 
 // Call the async function to load data and create the visualization
 loadDataAndVisualize();
-
-
-
-
-
-
-
-
